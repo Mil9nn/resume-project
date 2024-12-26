@@ -1,0 +1,127 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+form {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+    padding: 10px;
+}
+
+form input, textarea {
+    padding: 5px 10px;
+}
+
+form input {
+    padding: 10px;
+    box-shadow: 0 4px 12px rgba(150, 150, 150, 1);
+    border: none;
+}
+
+
+
+.education-date {
+    display: flex;
+    gap: 10px;
+}
+
+.Education-Input {
+    padding: 10px;
+    box-shadow: 0 4px 12px rgba(150, 150, 150, 1);
+    width: 25rem;
+}
+.Education-Input textarea {
+    width: 99%;
+    height: 4rem;
+    border: none;
+    resize: none;
+    outline: none;
+}
+.Education-Input input {
+    border: none;
+    outline: none;
+}
+
+.Experience-Input {
+    padding: 10px;
+    box-shadow: 0 4px 12px rgba(150, 150, 150, 1);
+    width: 25rem;
+}
+.Experience-Input textarea {
+    width: 99%;
+    height: 5rem;
+    border: none;
+    resize: none;
+    outline: none;
+}
+.Experience-Input input {
+    border: none;
+    outline: none;
+}
+
+
+
+.resume {
+    display: inline-block;
+    padding: 10px;
+    box-shadow: 0 4px 12px rgba(150, 150, 150, 1);
+    position: absolute;
+    top: 10%;
+    left: 40%;
+}
+
+.personal {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 3px solid #000;
+}
+
+.personal p {
+    margin-bottom: 5px;
+}
+
+.degree-with-cgpa {
+    display: flex;
+    gap: 30px;
+    padding: 5px 0px;
+}
+
+.education {
+    padding: 5px;
+}
+
+.experience {
+    padding: 5px;
+}
+
+.experience-des {
+    width: 15rem;
+    padding: 5px;
+}
+.experience-date {
+    padding: 0px 5px;
+}
+
+aside {
+    padding: 5px;
+}
+.skills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 5px 10px;
+}
+.skills p {
+    padding-right: 5px;
+    border-right: 2px solid #000;
+}
+
+
+.title-company {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 5px;
+}
