@@ -7,169 +7,167 @@
 html {
     font-family: "Roboto", sans-serif;
     font-size: 62.5%;
+    background-color: #f5f5f5;
 }
 
 form {
-    display: inline-flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 5px;
-    padding: 10px;
+    padding: 20px 60px;
     position: relative;
-    height: 100vh;
-    width: 55rem;
 }
 
-form input, textarea {
-    padding: 5px 10px;
-}
 
 form input {
-    padding: 10px;
-    box-shadow: 0 4px 12px rgba(150, 150, 150, 1);
-    border: none;
+    padding: 10px 20px;
 }
 
-/* Education Section */
-.education-date {
+form textarea {
+    padding: 10px 20px;
+    resize: none;
+}
+
+.input-field-component {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.input-field-education input {
+    border: none;
+    outline: none;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 
+    0 1px 3px rgba(0, 0, 0, 0.06);
+}
+
+/********************/
+/*******HEADER******/
+/********************/
+header {
+    background-color: #008080;
+    padding: 20px;
+}
+
+/***************************/
+/*******EXPERIENCE**********/
+/***************************/
+
+.input-field-experience input {
+    border: none;
+    outline: none;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 
+    0 1px 3px rgba(0, 0, 0, 0.06);
+}
+
+.input-field-experience textarea {
+    border: none;
+    outline: none;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 
+    0 1px 3px rgba(0, 0, 0, 0.06);
+    height: 7rem;
+    width: 25rem;
+}
+
+.experience-section {
     display: flex;
     gap: 10px;
-}
-
-.education-input {
-    padding: 10px;
-    box-shadow: 0 4px 12px rgba(150, 150, 150, 1);
-    width: 45rem;
-    border: 1px solid purple;
-}
-
-.education-input textarea {
-    width: 88%;
-    height: 4rem;
-    border: none;
-    resize: none;
-    outline: none;
-    margin-bottom: 3px;
-}
-
-.education-input input {
-    border: none;
-    outline: none;
-}
-
-/* Experience Section */
-.experience-input {
-    padding: 10px;
-    box-shadow: 0 4px 12px rgba(150, 150, 150, 1);
-    width: 45rem;
-    border: 1px solid purple;
-}
-
-.experience-input textarea {
-    width: 88%;
-    height: 5rem;
-    border: none;
-    resize: none;
-    outline: none;
-    margin-bottom: 3px;
-}
-
-.experience-input input {
-    border: none;
-    outline: none;
-}
-
-/* Resume Section */
-.resume {
-    display: inline-block;
-    padding: 10px;
-    box-shadow: 0 4px 12px rgba(150, 150, 150, 1);
-    position: absolute;
-    top: 10%;
-    left: 40%;
-    font-size: 2rem;
-}
-
-.personal {
-    display: flex;
-    justify-content: space-between;
-    border-bottom: 3px solid #000;
-    font-size: 2rem;
-}
-
-.personal p {
-    margin-bottom: 5px;
-}
-
-.degree-with-cgpa {
-    display: flex;
-    gap: 30px;
-    padding: 5px 0px;
-}
-
-.education {
-    padding: 5px 10px;
-    font-size: 2rem;
+    justify-content: center;
+    align-items: flex-end;
 }
 
 .experience {
-
+    padding: 5px;
+    width: 30rem;
 }
 
-aside {
-    padding: 5px;
+
+
+/**************************/
+/**************SKILLS******/
+/******************************/
+.input-skills-achievements textarea {
+    border: none;
+    outline: none;
+    height: 8rem;
+    resize: none;
+}
+
+.skills-input-title {
+    padding: 10px 20px;
+    display: inline;
+    font-size: 1.5rem;
+    color: gray;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 
+    0 1px 3px rgba(0, 0, 0, 0.06);
 }
 
 .skills {
+    white-space: pre-wrap;
+}
+
+/********************************/
+/***********PERSONAL INFO*******/
+/********************************/
+.input-field-personal input {
+    border: none;
+    outline: none;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 
+    0 1px 3px rgba(0, 0, 0, 0.06);
+}
+.personal-info {
+    border-bottom: 2px solid #000;
+}
+
+
+/****************************/
+/***********EDUCATION********/
+/*****************************/
+.education {
+    padding: 5px;
+}
+
+
+/*******************************/
+/**************DISPLAY DATA********/
+/*********************************/
+.resume-container {
+    width: calc(100vh * 0.707); /* Maintain A4 aspect ratio (width = height * 0.707) */
+    height: 90vh; /* Fit screen height */
+    margin: auto;
+    background: white;
+    padding: 10mm;
     display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    padding: 5px 10px;
-    font-size: 2rem;
-}
-
-.skills p {
-    padding-right: 5px;
-    border-right: 1px solid #000;
-}
-
-/* Title and Company Section in Experience */
-.title-company {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 5px;
-}
-
-/* Skills Section */
-.skill-input {
-    display: flex;
-}
-
-.hobbies-fab {
+    flex-direction: column;
+    justify-content: space-between;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
     position: absolute;
+    bottom: 1%;
+    left: 35%;
+    font-size: 1.8rem;
 }
 
-.job-title {
-    max-width: fit-content;
-    border-bottom: 1px solid #000;
+.resume p {
+    width: 30rem;
+    margin-bottom: 5px;
+    margin-left: 5px;
 }
 
-.job {
-    padding: 5px 10px;
-    font-size: 2rem;
-}
-
-.namePlusDegree {
+.degreePlusCgpa {
     display: flex;
-    gap: 10px;
+    justify-content: space-between;
+}
+
+.jobTitle {
+    width: fit-content;
+    border-bottom: 2px solid #000;
     margin-bottom: 5px;
 }
-.titlePlusCompany {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 5px;
+
+.date {
+    font-size: 1.5rem;
+    margin-top: 8px;
 }
-.dates {
+
+.namePlusEmail {
     display: flex;
-    gap: 15px;
+    justify-content: space-between;
 }

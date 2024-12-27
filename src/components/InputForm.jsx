@@ -1,326 +1,427 @@
 import { useState } from "react";
+import Fab from "@mui/material/Fab";
 import AddIcon from "@mui/icons-material/Add";
 import EditIcon from "@mui/icons-material/Edit";
-import Fab from "@mui/material/Fab";
 
 function InputForm() {
-    const [personalInfo, setPersonalInfo] = useState({
-        name: "John Doe",
-        email: "john.doe@example.com",
-        phone: "123-456-7890",
-    });
+  const [isDisplayed, setIsDisplayed] = useState({
+    personal: false,
+    education: false,
+    experience: false,
+    experience2: false,
+    skills: false,
+  });
 
-    const [educationInfo, setEducationInfo] = useState({
-        collegeName: "ABC University",
-        degree: "Bachelor of Science",
-        edField: "Computer Science",
-        startDate: "2020-01-01",
-        endDate: "2024-01-01",
-        cgpa: "9.0",
-    });
+  const [formData, setFormData] = useState({
+    personal: {
+      name: "John Doe",
+      email: "Johndoe83@gmail.com",
+      phone: "1237894560",
+    },
+    education: {
+      college: "Hogwart's University of Magic",
+      degree: "Bachelor's of Magic",
+      cgpa: "8.9",
+      startDate: "2015-01-02",
+      endDate: "2019-03-09",
+    },
+    experience: {
+      jobTitle: "Senior Magic Developer",
+      company: "Black Hand Organization",
+      jobDescription:
+        "Worked on various spells like lightning, rage, and invisible potion.",
+      startDate: "2020-01-01",
+      endDate: "2021-02-01",
+    },
+    experience2: {
+      jobTitle: "Junior Front End Developer",
+      company: "Black Hand Organization",
+      jobDescription:
+        "Worked on various spells like lightning, rage, and invisible potion.",
+      startDate: "2022- 08-09",
+      endDate: "2023-08-09",
+    },
+    skills: {
+      skills: "HTML  CSS  JavaScript  React",
+      achievements: "Won a Gold at the Black Hand Championship Rem",
+    },
+  });
 
-    const [experiences, setExperiences] = useState([
-        {
-            jobTitle: "Software Engineer",
-            company: "Tech Corp",
-            exField: "Developed full-stack web applications.",
-            startDate: "2022-06",
-            endDate: "2023-12",
-        },
-        {
-            jobTitle: "Intern",
-            company: "Startup Inc",
-            exField: "Worked on frontend components.",
-            startDate: "2021-05",
-            endDate: "2021-08",
-        },
-    ]);
+  const [finalData, setFinalData] = useState({
+    personal: { name: "", email: "", phone: "" },
+    education: {
+      college: "",
+      degree: "",
+      cgpa: "",
+      startDate: "",
+      endDate: "",
+    },
+    experience: {
+      jobTitle: "",
+      company: "",
+      jobDescription: "",
+      startDate: "",
+      endDate: "",
+    },
+    experience2: {
+      jobTitle: "",
+      company: "",
+      jobDescription: "",
+      startDate: "",
+      endDate: "",
+    },
+    skills: { skills: "", achievements: "" },
+  });
 
-    const [skillsInfo, setSkillsInfo] = useState({
-        skills: ["JavaScript", "React", "Node.js"],
-        hobbies: ["Reading", "Cycling", "Traveling"],
-    });
+  function toggleVisibility(section) {
+    setIsDisplayed((prev) => ({
+      ...prev,
+      [section]: !prev[section],
+    }));
+  }
 
-    function handlePersonalChange(event) {
-        const { name, value } = event.target;
-        setPersonalInfo((prevValue) => ({
-            ...prevValue,
-            [name]: value,
-        }));
-    }
+  function handleChange(event, section) {
+    const { name, value } = event.target;
+    setFormData((prev) => ({
+      ...prev,
+      [section]: { ...prev[section], [name]: value },
+    }));
+  }
 
-    function handleEducationChange(event) {
-        const { name, value } = event.target;
-        setEducationInfo((prevValue) => ({
-            ...prevValue,
-            [name]: value,
-        }));
-    }
+  function handleAdd(section) {
+    setFinalData((prev) => ({
+      ...prev,
+      [section]: formData[section],
+    }));
+    toggleVisibility(section);
+  }
 
-    const handleExperienceChange = (index, event) => {
-        const { name, value } = event.target;
-        setExperiences((prev) =>
-            prev.map((exp, i) =>
-                i === index
-                    ? {
-                          ...exp,
-                          [name]: value,
-                      }
-                    : exp
-            )
-        );
-    };
-
-    const addExperience = () => {
-        if (experiences.length < 2) {
-            setExperiences((prev) => [
-                ...prev,
-                {
-                    jobTitle: "",
-                    company: "",
-                    exField: "",
-                    startDate: "",
-                    endDate: "",
-                },
-            ]);
-        } else {
-            alert("You can only add up to two experiences.");
-        }
-    };
-
-    const addSkill = () => {
-        setSkillsInfo((prev) => ({
-            ...prev,
-            skills: [...prev.skills, "New Skill"],
-        }));
-    };
-
-    const formatDateRange = (start, end) => {
-        const options = { year: "numeric", month: "long" };
-        const startDate = new Date(start).toLocaleDateString("en-US", options);
-        const endDate = new Date(end).toLocaleDateString("en-US", options);
-        return `${startDate} to ${endDate}`;
-    };
-
-    return (
-        <div>
-            <form>
-                {/* Personal Information */}
-                <div className="personal-input">
-                    <input
-                        onChange={handlePersonalChange}
-                        type="text"
-                        name="name"
-                        placeholder="Name"
-                        value={personalInfo.name}
-                    />
-                    <input
-                        onChange={handlePersonalChange}
-                        type="email"
-                        name="email"
-                        placeholder="Email"
-                        value={personalInfo.email}
-                    />
-                    <input
-                        onChange={handlePersonalChange}
-                        type="tel"
-                        name="phone"
-                        placeholder="Phone"
-                        value={personalInfo.phone}
-                    />
-                </div>
-
-                {/* Education Information */}
-                <div className="education-input">
-                    <div className="namePlusDegree">
-                        <input
-                            onChange={handleEducationChange}
-                            type="text"
-                            name="collegeName"
-                            placeholder="College Name"
-                            value={educationInfo.collegeName}
-                        />
-                        <input
-                            onChange={handleEducationChange}
-                            type="text"
-                            name="degree"
-                            placeholder="Degree"
-                            value={educationInfo.degree}
-                        />
-                    </div>
-                    <textarea
-                        onChange={handleEducationChange}
-                        name="edField"
-                        placeholder="Write your Education details..."
-                        value={educationInfo.edField}
-                    ></textarea>
-                    <div className="dates">
-                        <input
-                            onChange={handleEducationChange}
-                            type="date"
-                            name="startDate"
-                            value={educationInfo.startDate}
-                        />
-                        <input
-                            onChange={handleEducationChange}
-                            type="date"
-                            name="endDate"
-                            value={educationInfo.endDate}
-                        />
-                        <input
-                            onChange={handleEducationChange}
-                            style={{ width: "80px" }}
-                            type="number"
-                            name="cgpa"
-                            max="10"
-                            min="1"
-                            placeholder="CGPA"
-                            value={educationInfo.cgpa}
-                        />
-                    </div>
-                </div>
-
-                {/* Experience Information */}
-                <div className="experience-input">
-                    <h3>Experience</h3>
-                    {experiences.map((exp, index) => (
-                        <div key={index}>
-                            <div className="titlePlusCompany">
-                                <input
-                                    type="text"
-                                    name="jobTitle"
-                                    placeholder="Job Title"
-                                    value={exp.jobTitle}
-                                    onChange={(e) => handleExperienceChange(index, e)}
-                                />
-                                <input
-                                    type="text"
-                                    name="company"
-                                    placeholder="Company"
-                                    value={exp.company}
-                                    onChange={(e) => handleExperienceChange(index, e)}
-                                />
-                            </div>
-                            <textarea
-                                name="exField"
-                                placeholder="Write your Experience..."
-                                value={exp.exField}
-                                onChange={(e) => handleExperienceChange(index, e)}
-                            ></textarea>
-                            <div className="dates">
-                                <input
-                                    type="month"
-                                    name="startDate"
-                                    value={exp.startDate}
-                                    onChange={(e) => handleExperienceChange(index, e)}
-                                />
-                                <input
-                                    type="month"
-                                    name="endDate"
-                                    value={exp.endDate}
-                                    onChange={(e) => handleExperienceChange(index, e)}
-                                />
-                            </div>
-                            <Fab
-                                size="small"
-                                color="primary"
-                                aria-label="edit"
-                                sx={{ marginRight: "10px", transform: "scale(0.8)" }}
-                            >
-                                <EditIcon />
-                            </Fab>
-                        </div>
-                    ))}
-                    <Fab
-                        size="small"
-                        color="secondary"
-                        aria-label="add"
-                        onClick={addExperience}
-                        sx={{
-                            marginTop: "10px",
-                            transform: "scale(0.8)",
-                        }}
-                    >
-                        <AddIcon />
-                    </Fab>
-                </div>
-
-                {/* Skills Section */}
-                <div className="skill-input">
-                    <div>
-                        {skillsInfo.skills.map((skill, index) => (
-                            <input
-                                key={index}
-                                type="text"
-                                value={skill}
-                                readOnly
-                                style={{
-                                    display: "inline-block",
-                                    margin: "5px",
-                                    padding: "5px",
-                                }}
-                            />
-                        ))}
-                    </div>
-                    <Fab
-                        onClick={addSkill}
-                        size="small"
-                        color="secondary"
-                        aria-label="add"
-                        sx={{
-                            transform: "scale(0.8)",
-                        }}
-                    >
-                        <AddIcon />
-                    </Fab>
-                </div>
-            </form>
-
-            {/* Resume Section */}
-            <section className="resume">
-                <div className="personal">
-                    <p>{personalInfo.name}</p>
-                    <div className="contact">
-                        <p>{personalInfo.email}</p>
-                        <p>{personalInfo.phone}</p>
-                    </div>
-                </div>
-
-                <div>
-                    <h3>Education</h3>
-                    <div className="education">
-                        <p>{educationInfo.collegeName}</p>
-                        <p>{educationInfo.degree}</p>
-                        <p>CGPA: {educationInfo.cgpa}</p>
-                        <p>{formatDateRange(educationInfo.startDate, educationInfo.endDate)}</p>
-                    </div>
-                </div>
-
-                <div>
-                    <h3>Experience</h3>
-                    <div className="experience">
-                        {experiences.map((exp, index) => (
-                            <div className="job" key={index}>
-                                <p className="job-title">{exp.jobTitle}</p>
-                                <p>{exp.company}</p>
-                                <p>{exp.exField}</p>
-                                <p>{formatDateRange(exp.startDate, exp.endDate)}</p>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-
-                <div>
-                    <h3>Skills</h3>
-                    <div className="skills">
-                        {skillsInfo.skills.map((skill, index) => (
-                            <p key={index}>{skill}</p>
-                        ))}
-                    </div>
-                </div>
-            </section>
+  return (
+    <div>
+      <form>
+        {/* Personal Info */}
+        <div className="input-field-personal">
+          <input
+            onChange={(e) => handleChange(e, "personal")}
+            type="text"
+            name="name"
+            placeholder="Your Name"
+            value={formData.personal.name}
+          />
+          <div
+            style={{ display: isDisplayed.personal ? "flex" : "none" }}
+            className="input-field-component"
+          >
+            <input
+              onChange={(e) => handleChange(e, "personal")}
+              type="email"
+              name="email"
+              placeholder="Email"
+              value={formData.personal.email}
+            />
+            <input
+              onChange={(e) => handleChange(e, "personal")}
+              type="tel"
+              name="phone"
+              placeholder="Phone No"
+              value={formData.personal.phone}
+            />
+            <Fab
+              onClick={() => handleAdd("personal")}
+              color="primary"
+              size="small"
+              aria-label="add"
+            >
+              <AddIcon />
+            </Fab>
+          </div>
+          <Fab
+            onClick={() => toggleVisibility("personal")}
+            style={{ display: isDisplayed.personal ? "none" : "inline-flex" }}
+            color="primary"
+            size="small"
+            aria-label="edit"
+          >
+            <EditIcon />
+          </Fab>
         </div>
-    );
+
+        {/* Education */}
+
+        <div className="input-field-education">
+          <input
+            onChange={(e) => handleChange(e, "education")}
+            type="text"
+            name="college"
+            placeholder="College Name"
+            value={formData.education.college}
+          />
+          <div
+            style={{ display: isDisplayed.education ? "flex" : "none" }}
+            className="input-field-component"
+          >
+            <input
+              onChange={(e) => handleChange(e, "education")}
+              type="text"
+              name="degree"
+              placeholder="Degree Name"
+              value={formData.education.degree}
+            />
+            <input
+              onChange={(e) => handleChange(e, "education")}
+              type="number"
+              name="cgpa"
+              placeholder="CGPA"
+              value={formData.education.cgpa}
+            />
+            <input
+              onChange={(e) => handleChange(e, "education")}
+              type="date"
+              name="startDate"
+              value={formData.education.startDate}
+            />
+            <input
+              onChange={(e) => handleChange(e, "education")}
+              type="date"
+              name="endDate"
+              value={formData.education.endDate}
+            />
+            <Fab
+              onClick={() => handleAdd("education")}
+              color="primary"
+              size="small"
+              aria-label="add"
+            >
+              <AddIcon />
+            </Fab>
+          </div>
+          <Fab
+            onClick={() => toggleVisibility("education")}
+            style={{ display: isDisplayed.education ? "none" : "inline-flex" }}
+            color="primary"
+            size="small"
+            aria-label="edit"
+          >
+            <EditIcon />
+          </Fab>
+        </div>
+
+        {/* Experience */}
+
+        <div className="input-field-experience">
+          <input
+            onChange={(e) => handleChange(e, "experience")}
+            type="text"
+            name="jobTitle"
+            placeholder="Job Title"
+            value={formData.experience.jobTitle}
+          />
+          <div
+            style={{
+              display: isDisplayed.experience ? "flex" : "none",
+            }}
+            className="input-field-component"
+          >
+            <input
+              onChange={(e) => handleChange(e, "experience")}
+              type="text"
+              name="company"
+              placeholder="Company Name"
+              value={formData.experience.company}
+            />
+            <textarea
+              onChange={(e) => handleChange(e, "experience")}
+              name="jobDescription"
+              placeholder="Write your experience..."
+              value={formData.experience.jobDescription}
+            ></textarea>
+            <input
+              onChange={(e) => handleChange(e, "experience")}
+              type="date"
+              name="startDate"
+              value={formData.experience.startDate}
+            />
+            <input
+              onChange={(e) => handleChange(e, "experience")}
+              type="date"
+              name="endDate"
+              value={formData.experience.endDate}
+            />
+            <Fab
+              onClick={() => handleAdd("experience")}
+              color="primary"
+              size="small"
+              aria-label="add"
+            >
+              <AddIcon />
+            </Fab>
+          </div>
+          <Fab
+            onClick={() => toggleVisibility("experience")}
+            style={{ display: isDisplayed.experience ? "none" : "inline-flex" }}
+            color="primary"
+            size="small"
+            aria-label="edit"
+          >
+            <EditIcon />
+          </Fab>
+        </div>
+
+        {/* 2nd Experience */}
+
+        <div className="input-field-experience">
+          <input
+            onChange={(e) => handleChange(e, "experience2")}
+            type="text"
+            name="jobTitle"
+            placeholder="Job Title"
+            value={formData.experience2.jobTitle}
+          />
+          <div
+            style={{
+              display: isDisplayed.experience2 ? "flex" : "none",
+            }}
+            className="input-field-component"
+          >
+            <input
+              onChange={(e) => handleChange(e, "experience2")}
+              type="text"
+              name="company"
+              placeholder="Company Name"
+              value={formData.experience2.company}
+            />
+            <textarea
+              onChange={(e) => handleChange(e, "experience2")}
+              name="jobDescription"
+              placeholder="Write your experience..."
+              value={formData.experience2.jobDescription}
+            ></textarea>
+            <input
+              onChange={(e) => handleChange(e, "experience2")}
+              type="date"
+              name="startDate"
+              value={formData.experience2.startDate}
+            />
+            <input
+              onChange={(e) => handleChange(e, "experience2")}
+              type="date"
+              name="endDate"
+              value={formData.experience2.endDate}
+            />
+            <Fab
+              onClick={() => handleAdd("experience2")}
+              color="primary"
+              size="small"
+              aria-label="add"
+            >
+              <AddIcon />
+            </Fab>
+          </div>
+          <Fab
+            onClick={() => toggleVisibility("experience2")}
+            style={{
+              display: isDisplayed.experience2 ? "none" : "inline-flex",
+            }}
+            color="primary"
+            size="small"
+            aria-label="edit"
+          >
+            <EditIcon />
+          </Fab>
+        </div>
+
+        {/* Skills */}
+
+        <div className="input-skills-achievements">
+          <p className="skills-input-title">Skills and Achievements</p>
+          <div
+            style={{
+              display: isDisplayed.skills ? "block" : "none",
+            }}
+          >
+            <textarea
+              onChange={(e) => handleChange(e, "skills")}
+              name="skills"
+              placeholder="Write skills..."
+              value={formData.skills.skills}
+            ></textarea>
+            <br />
+            <textarea
+              onChange={(e) => handleChange(e, "skills")}
+              name="achievements"
+              placeholder="Write achievements..."
+              value={formData.skills.achievements}
+            ></textarea>
+            <Fab
+              onClick={() => handleAdd("skills")}
+              color="primary"
+              size="small"
+              aria-label="add"
+            >
+              <AddIcon />
+            </Fab>
+          </div>
+          <Fab
+            onClick={() => toggleVisibility("skills")}
+            style={{ display: isDisplayed.skills ? "none" : "inline-flex" }}
+            color="primary"
+            size="small"
+            aria-label="edit"
+          >
+            <EditIcon />
+          </Fab>
+        </div>
+      </form>
+      <div className="resume-container">
+        <div className="personal-info">
+          <h3>Personal Info</h3>
+          <div className="namePlusEmail">
+            <p>{finalData.personal.name}</p>
+            <p>{finalData.personal.email}</p>
+          </div>
+          <p>{finalData.personal.phone}</p>
+        </div>
+        <h3>Education</h3>
+        <div className="education">
+          <p>{finalData.education.college}</p>
+          <div className="degreePlusCgpa">
+            <p>{finalData.education.degree}</p>
+            <p>CGPA: {finalData.education.cgpa}</p>
+          </div>
+          <p className="date">
+            {finalData.education.startDate} to {finalData.education.endDate}
+          </p>
+        </div>
+        <div>
+          <h3>Experience</h3>
+          <div className="experience-section">
+            <div className="experience">
+              <p className="jobTitle">{finalData.experience.jobTitle}</p>
+              <p>{finalData.experience.company}</p>
+              <p>{finalData.experience.jobDescription}</p>
+              <p className="date">
+                {finalData.experience.startDate} to{" "}
+                {finalData.experience.endDate}
+              </p>
+            </div>
+            <div className="experience">
+              <p className="jobTitle">{finalData.experience2.jobTitle}</p>
+              <p>{finalData.experience2.company}</p>
+              <p>{finalData.experience2.jobDescription}</p>
+              <p className="date">
+                {finalData.experience2.startDate} to{" "}
+                {finalData.experience2.endDate}
+              </p>
+            </div>
+          </div>
+        </div>
+        <h3>Skills</h3>
+        <div>{finalData.skills.skills}</div>
+        <h3>Achievements</h3>
+        <div>{finalData.skills.achievements}</div>
+      </div>
+    </div>
+  );
 }
 
 export default InputForm;
